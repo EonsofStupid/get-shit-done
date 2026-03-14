@@ -60,15 +60,17 @@ pub async fn execute_command(
         .map(PathBuf::from)
         .unwrap_or_else(|| std::env::current_dir().unwrap_or_default());
 
-    // Build the node command to invoke GSD CLI
-    let gsd_args = build_gsd_args(&command, &args);
+    // Determine how to invoke GSD:
+    // 1. Try the installed `get-shit-done-cc` CLI binary directly
+    // 2. Fall back to `npx get-shit-done-cc` if the binary is not on PATH
+    let (program, gsd_args) = build_gsd_invocation(&command, &args);
 
-    let output = tokio::process::Command::new("node")
+    let output = tokio::process::Command::new(&program)
         .args(&gsd_args)
         .current_dir(&dir)
         .output()
         .await
-        .map_err(|e| format!("Failed to execute command: {}", e))?;
+        .map_err(|e| format!("Failed to execute command '{}': {}", program, e))?;
 
     let stdout = String::from_utf8_lossy(&output.stdout).to_string();
     let stderr = String::from_utf8_lossy(&output.stderr).to_string();
@@ -163,14 +165,20 @@ async fn load_project_state(project_dir: Option<String>) -> ProjectState {
     state
 }
 
-/// Helper: build GSD CLI args from a slash command.
-fn build_gsd_args(command: &str, extra_args: &[String]) -> Vec<String> {
-    // Strip leading slash if present
-    let cmd = command.trim_start_matches('/');
-    let mut args = vec!["-e".to_string(), format!("require('get-shit-done-cc')")];
-    args.push(cmd.to_string());
+/// Helper: build the program + args to invoke the GSD CLI.
+/// Returns (program, args) suitable for Command::new(program).args(args).
+///
+/// The GSD CLI is installed as the `get-shit-done-cc` npm binary.
+/// We strip any leading slash from the slash-command, then pass it as the
+/// first argument to the CLI (e.g. `get-shit-done-cc gsd:new-project`).
+fn build_gsd_invocation(command: &str, extra_args: &[String]) -> (String, Vec<String>) {
+    // Strip leading slash if present (e.g. /gsd:new-project → gsd:new-project)
+    let cmd = command.trim_start_matches('/').to_string();
+
+    let mut args = vec![cmd];
     args.extend_from_slice(extra_args);
-    args
+
+    ("get-shit-done-cc".to_string(), args)
 }
 
 #[cfg(test)]
@@ -178,15 +186,25 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_build_gsd_args_strips_slash() {
-        let args = build_gsd_args("/gsd:new-project", &[]);
+    fn test_build_gsd_invocation_strips_slash() {
+        let (program, args) = build_gsd_invocation("/gsd:new-project", &[]);
+        assert_eq!(program, "get-shit-done-cc");
         assert!(args.contains(&"gsd:new-project".to_string()));
     }
 
     #[test]
-    fn test_build_gsd_args_no_slash() {
-        let args = build_gsd_args("gsd:new-project", &[]);
+    fn test_build_gsd_invocation_no_slash() {
+        let (program, args) = build_gsd_invocation("gsd:new-project", &[]);
+        assert_eq!(program, "get-shit-done-cc");
         assert!(args.contains(&"gsd:new-project".to_string()));
+    }
+
+    #[test]
+    fn test_build_gsd_invocation_with_extra_args() {
+        let extra = vec!["1".to_string()];
+        let (program, args) = build_gsd_invocation("/gsd:execute-phase", &extra);
+        assert_eq!(program, "get-shit-done-cc");
+        assert_eq!(args, vec!["gsd:execute-phase", "1"]);
     }
 
     #[test]

@@ -139,7 +139,7 @@ mod tests {
     use crate::commands::ProjectState;
 
     #[test]
-    fn test_uninitialised_suggests_new_project() {
+    fn test_uninitialized_suggests_new_project() {
         let state = ProjectState::default();
         let suggestions = get_context_suggestions(&state);
         assert!(suggestions.iter().any(|s| s.command == "/gsd:new-project"));
