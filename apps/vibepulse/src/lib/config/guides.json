@@ -1,0 +1,101 @@
+[
+  {
+    "id": "getting-started",
+    "title": "Getting Started with GSD",
+    "description": "Learn the core GSD workflow from project initialization to phase execution",
+    "difficulty": "beginner",
+    "estimatedTime": "10 minutes",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Initialize Your Project",
+        "description": "Every GSD project starts with initialization. This creates the .planning directory with your config.",
+        "command": "/gsd:new-project",
+        "what_happens": "GSD will ask you questions about your project and create a structured configuration in .planning/config.json",
+        "common_mistakes": ["Running this in the wrong directory", "Running it when project is already initialized"],
+        "tip": "Make sure you're in your project's git root directory first!"
+      },
+      {
+        "id": 2,
+        "title": "Research Your Project",
+        "description": "Before planning, do research to understand your domain and technical requirements.",
+        "command": "/gsd:research",
+        "what_happens": "GSD will research your project domain and create a RESEARCH.md file with findings",
+        "common_mistakes": ["Skipping research and going straight to planning"],
+        "tip": "Good research leads to better plans and fewer surprises during execution."
+      },
+      {
+        "id": 3,
+        "title": "Create Your Roadmap",
+        "description": "Generate a structured phase-based roadmap from your research.",
+        "command": "/gsd:roadmap",
+        "what_happens": "GSD creates a ROADMAP.md with phases, milestones, and success criteria",
+        "common_mistakes": ["Creating a roadmap without research first"],
+        "tip": "The roadmap breaks your project into manageable phases."
+      },
+      {
+        "id": 4,
+        "title": "Discuss Phase 1",
+        "description": "Talk through the requirements and goals for your first phase.",
+        "command": "/gsd:discuss-phase 1",
+        "what_happens": "Interactive discussion about phase scope, technical approach, and success criteria",
+        "common_mistakes": ["Skipping discussion and going straight to planning"],
+        "tip": "Discussion ensures Claude understands exactly what you want to build."
+      },
+      {
+        "id": 5,
+        "title": "Plan Phase 1",
+        "description": "Generate a detailed implementation plan with tasks and acceptance criteria.",
+        "command": "/gsd:plan-phase 1",
+        "what_happens": "Creates PLAN.md with step-by-step implementation tasks",
+        "common_mistakes": ["Executing without a plan", "Not reviewing the plan before executing"],
+        "tip": "Review the plan carefully — you can ask for changes before executing."
+      },
+      {
+        "id": 6,
+        "title": "Execute Phase 1",
+        "description": "Start the actual implementation following your plan.",
+        "command": "/gsd:execute-phase 1",
+        "what_happens": "GSD works through each task in your plan, writing code and creating files",
+        "common_mistakes": ["Interrupting execution midway", "Not having a clean git state first"],
+        "tip": "Commit any uncommitted changes before executing a phase."
+      },
+      {
+        "id": 7,
+        "title": "Verify Phase 1",
+        "description": "Verify all artifacts and acceptance criteria are met.",
+        "command": "/gsd:verify-phase 1",
+        "what_happens": "GSD checks each artifact exists and meets criteria, reports pass/fail",
+        "common_mistakes": ["Skipping verification and moving to the next phase"],
+        "tip": "Verification catches issues early before they compound in later phases."
+      }
+    ]
+  },
+  {
+    "id": "preference-setup",
+    "title": "Configuring Your Preferences",
+    "description": "Set up your personal GSD configuration for optimal workflow",
+    "difficulty": "beginner",
+    "estimatedTime": "5 minutes",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Open Preferences",
+        "description": "Navigate to the Preferences page to configure your GSD settings.",
+        "command": null,
+        "what_happens": "The preferences page shows all configurable options with descriptions",
+        "common_mistakes": [],
+        "tip": "Your preferences are saved to .planning/config.json in your project."
+      },
+      {
+        "id": 2,
+        "title": "Choose Your Model Profile",
+        "description": "Select quality, balanced, or budget profile based on your needs.",
+        "command": null,
+        "what_happens": "Sets the default Claude model tier for GSD commands",
+        "common_mistakes": ["Using quality mode for everything (expensive)"],
+        "tip": "Balanced mode works great for most development tasks."
+      }
+    ]
+  }
+]

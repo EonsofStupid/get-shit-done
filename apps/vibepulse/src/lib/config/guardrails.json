@@ -1,0 +1,47 @@
+[
+  {
+    "id": "new-project-initialized",
+    "command": "gsd:new-project",
+    "condition": "project_initialized",
+    "severity": "warning",
+    "message": "Project is already initialized (.planning directory exists).",
+    "suggestion": "Use /gsd:discuss-phase 1 to start your first phase, or check your existing config.",
+    "allowOverride": true
+  },
+  {
+    "id": "execute-not-discussed",
+    "command": "gsd:execute-phase",
+    "condition": "phase_not_discussed",
+    "severity": "error",
+    "message": "You must discuss this phase before executing it.",
+    "suggestion": "Run /gsd:discuss-phase {phase} first to define the requirements.",
+    "allowOverride": false
+  },
+  {
+    "id": "execute-not-planned",
+    "command": "gsd:execute-phase",
+    "condition": "phase_not_planned",
+    "severity": "warning",
+    "message": "This phase hasn't been planned yet.",
+    "suggestion": "Consider running /gsd:plan-phase {phase} first for best results.",
+    "allowOverride": true
+  },
+  {
+    "id": "execute-phase-out-of-range",
+    "command": "gsd:execute-phase",
+    "condition": "phase_out_of_range",
+    "severity": "error",
+    "message": "That phase number doesn't exist in your project.",
+    "suggestion": "Your project has phases 1-{total}. Use a valid phase number.",
+    "allowOverride": false
+  },
+  {
+    "id": "not-initialized",
+    "command": "gsd:discuss-phase",
+    "condition": "not_initialized",
+    "severity": "error",
+    "message": "Project not initialized yet.",
+    "suggestion": "Run /gsd:new-project first to set up your project.",
+    "allowOverride": false
+  }
+]
