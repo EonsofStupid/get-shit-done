@@ -29,3 +29,9 @@ docs/GSD-SYSTEM-SPECIFICATION.md
 gaps.md
 improve.md
 philosophy.md
+
+# Vibepulse GSD app build artifacts
+apps/vibepulse/node_modules/
+apps/vibepulse/dist/
+apps/vibepulse/.svelte-kit/
+apps/vibepulse/src-tauri/target/

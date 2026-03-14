@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.svelte-kit/
+target/
+*.log
+.DS_Store
+
+# Tauri build artifacts
+src-tauri/target/
+
+# SvelteKit build
+.svelte-kit/
+
+# Generated types
+src/lib/types/tauri*.d.ts
+
+# Environment files
+.env
+.env.local
