@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  vibepulse-gsd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vibepulse-gsd
+    volumes:
+      # Mount the host project directory for live project detection
+      - ${PROJECT_PATH:-./}:/workspace
+      # Persist preferences
+      - vibepulse-prefs:/root/.config/vibepulse-gsd
+    environment:
+      - GSD_WORKSPACE=/workspace
+    ports:
+      # Dev server (SvelteKit)
+      - "1420:1420"
+    restart: unless-stopped
+    network_mode: host
+
+volumes:
+  vibepulse-prefs:
+    driver: local

@@ -1,0 +1,138 @@
+[
+  {
+    "id": "getting-started",
+    "title": "Getting Started with GSD",
+    "description": "Learn the fundamentals of the Get-Shit-Done workflow in 5 minutes",
+    "difficulty": "beginner",
+    "estimatedTime": "5 min",
+    "tags": ["basics", "setup", "introduction"],
+    "steps": [
+      {
+        "number": 1,
+        "title": "What is GSD?",
+        "content": "GSD (Get-Shit-Done) is a spec-driven development system for Claude Code. It helps you break large projects into manageable phases and milestones, with AI-assisted execution at each step. The goal is to turn vague ideas into working software in a structured, repeatable way.",
+        "tip": "GSD works best when you have a clear vision of what you want to build before you start."
+      },
+      {
+        "number": 2,
+        "title": "Initialize Your Project",
+        "content": "Start every GSD project by running /gsd:new-project. This creates your .planning directory with all the necessary files: SPEC.md (your requirements), RESEARCH.md (background research), PLAN.md (phases and milestones), and config.json (project settings).",
+        "command": "/gsd:new-project",
+        "expectedOutput": "Created .planning directory with GSD project structure",
+        "tip": "Run this command in your project's root directory where your code will live."
+      },
+      {
+        "number": 3,
+        "title": "Write Your Spec",
+        "content": "Before executing any code, write a detailed SPEC.md. This is the blueprint Claude Code follows. Include: what the project does, what it should NOT do, tech stack, user stories, acceptance criteria, and any constraints. The more specific, the better.",
+        "tip": "Treat SPEC.md like a contract with yourself. If it's vague, the output will be vague."
+      },
+      {
+        "number": 4,
+        "title": "Understand Phases & Milestones",
+        "content": "GSD organizes work into Phases (major project stages, e.g. 'Backend Setup', 'Frontend UI', 'Testing') and Milestones (smaller chunks within each phase). Each milestone contains specific tasks that Claude Code executes one by one.",
+        "tip": "Think of phases as chapters in a book and milestones as sections within each chapter."
+      },
+      {
+        "number": 5,
+        "title": "Execute Your First Phase",
+        "content": "Once your plan is ready, execute Phase 1. Claude Code will work through each task in sequence. The Vibepulse guardrails system will warn you before anything potentially destructive happens. Watch the terminal output to track progress.",
+        "command": "/gsd:execute-phase 1",
+        "expectedOutput": "Phase 1 execution started...",
+        "tip": "Always verify your work after executing a phase!"
+      },
+      {
+        "number": 6,
+        "title": "Verify and Move Forward",
+        "content": "After execution, verify the work matches your spec. This is crucial — it ensures Claude Code did exactly what you intended. If something's off, you can course-correct before proceeding. Then update your plan and move to the next phase.",
+        "command": "/gsd:verify-work 1",
+        "expectedOutput": "Phase 1 verification complete",
+        "tip": "Verification is not optional. It's how you maintain quality and catch drift from your spec early."
+      }
+    ]
+  },
+  {
+    "id": "guardrails",
+    "title": "Understanding Guardrails",
+    "description": "Learn how Vibepulse keeps you safe from common mistakes",
+    "difficulty": "beginner",
+    "estimatedTime": "3 min",
+    "tags": ["safety", "guardrails", "protection"],
+    "steps": [
+      {
+        "number": 1,
+        "title": "What are Guardrails?",
+        "content": "Guardrails are safety checks that run before any command executes. They detect common mistakes like skipping phases, running commands out of order, using dangerous shell commands, or providing invalid arguments. Guardrails run instantly before execution.",
+        "tip": "Guardrails are your safety net. They run locally in the Rust backend — no latency."
+      },
+      {
+        "number": 2,
+        "title": "Warning vs. Blocked",
+        "content": "There are two types of guardrail results: Warnings (orange) — you can proceed but should be careful. Blocked (red) — execution is prevented until the issue is resolved. Blocked guardrails protect you from irreversible actions like rm -rf or running phase 0.",
+        "tip": "Pay attention to warning messages even if you proceed — they often reveal misunderstandings."
+      },
+      {
+        "number": 3,
+        "title": "Reading Guardrail Messages",
+        "content": "Every guardrail violation shows three things: 1) What triggered it (the rule name), 2) What the problem is (the message), 3) What to do instead (the suggestion). Always read the suggestion — it tells you exactly how to fix the issue.",
+        "tip": "If you see a guardrail you disagree with, check the config/guardrails.json file to understand the rule."
+      },
+      {
+        "number": 4,
+        "title": "Customizing Guardrails",
+        "content": "The guardrails are defined in config/guardrails.json. Each rule has a pattern (regex), severity, and message. You can add your own project-specific rules — for example, blocking commands that would break your team's workflow conventions.",
+        "tip": "Start with the defaults and only add custom rules when you have a specific need."
+      }
+    ]
+  },
+  {
+    "id": "workflow",
+    "title": "The GSD Workflow Loop",
+    "description": "Master the Plan → Execute → Verify cycle that makes GSD powerful",
+    "difficulty": "intermediate",
+    "estimatedTime": "8 min",
+    "tags": ["workflow", "process", "intermediate"],
+    "steps": [
+      {
+        "number": 1,
+        "title": "The Core Loop",
+        "content": "The GSD workflow is a simple, repeating loop: Research → Plan → Execute → Verify → Update. You repeat this for every phase and milestone until your project is complete. Each iteration builds on the last, and verification ensures nothing drifts from your spec.",
+        "tip": "Never skip steps in the loop. Each step serves a purpose in maintaining quality."
+      },
+      {
+        "number": 2,
+        "title": "Research First",
+        "content": "Before planning, use /gsd:research to gather information. Good research answers: What technologies are involved? What are the edge cases? What have others tried? What are the gotchas? Document all of this in RESEARCH.md before you write a single line of code.",
+        "command": "/gsd:research",
+        "tip": "30 minutes of research can save 5 hours of rework."
+      },
+      {
+        "number": 3,
+        "title": "Plan in Detail",
+        "content": "Create detailed phases and milestones. The more specific your tasks, the better Claude Code can execute them. Instead of 'Set up database', write 'Create PostgreSQL schema with users, projects, and tasks tables with appropriate indexes and foreign keys'.",
+        "tip": "If a task description is vague enough that two developers would interpret it differently, make it more specific."
+      },
+      {
+        "number": 4,
+        "title": "Execute Incrementally",
+        "content": "Execute one milestone at a time rather than entire phases when possible. This gives you more control, makes debugging easier, and lets you course-correct earlier. Use /gsd:execute-milestone for granular control.",
+        "command": "/gsd:execute-milestone 1 1",
+        "tip": "Smaller execution units = faster feedback loops = better quality."
+      },
+      {
+        "number": 5,
+        "title": "Verify Everything",
+        "content": "After every execution, verify the work. Run the app, check the tests, review the output against your spec. Don't proceed to the next milestone until the current one is solid. Verification is how you maintain quality across a long project.",
+        "command": "/gsd:verify-work 1",
+        "tip": "Ask yourself: 'If I handed this milestone to a senior developer for review, would it pass?'"
+      },
+      {
+        "number": 6,
+        "title": "Update and Commit",
+        "content": "After verification, update your plan to reflect progress and create a structured commit. The plan update keeps PLAN.md current so you always know exactly where you are. Commits create checkpoints you can return to if needed.",
+        "command": "/gsd:commit",
+        "tip": "A commit after every verified milestone gives you a complete project history."
+      }
+    ]
+  }
+]

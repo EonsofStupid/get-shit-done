@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --vp-purple: #7c3aed;
+    --vp-pink: #ec4899;
+    --vp-emerald: #10b981;
+    --vp-amber: #f59e0b;
+    --vp-red: #ef4444;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: #0a0a0f;
+    color: #f1f5f9;
+  }
+
+  /* Terminal scrollbar */
+  .terminal-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .terminal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .terminal-scroll::-webkit-scrollbar-thumb {
+    background: #2a2a4a;
+    border-radius: 3px;
+  }
+  .terminal-scroll::-webkit-scrollbar-thumb:hover {
+    background: #7c3aed44;
+  }
+
+  /* Custom selection */
+  ::selection {
+    background: #7c3aed44;
+    color: #f1f5f9;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-vp-purple-600 hover:bg-vp-purple-500 text-white font-medium px-4 py-2 rounded-lg
+           transition-all duration-150 active:scale-95 shadow-vp-sm hover:shadow-vp-md;
+  }
+
+  .btn-ghost {
+    @apply text-vp-text-secondary hover:text-vp-text-primary hover:bg-vp-bg-elevated
+           font-medium px-3 py-2 rounded-lg transition-all duration-150;
+  }
+
+  .card {
+    @apply bg-vp-bg-card border border-vp-bg-border rounded-xl;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-purple {
+    @apply badge bg-vp-purple-600/20 text-vp-purple-300 border border-vp-purple-600/30;
+  }
+
+  .badge-green {
+    @apply badge bg-vp-emerald-500/20 text-vp-emerald-400 border border-vp-emerald-500/30;
+  }
+
+  .badge-yellow {
+    @apply badge bg-vp-amber-500/20 text-vp-amber-400 border border-vp-amber-500/30;
+  }
+
+  .badge-red {
+    @apply badge bg-vp-red-500/20 text-vp-red-400 border border-vp-red-500/30;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-gradient {
+    background: linear-gradient(#1a1a30, #1a1a30) padding-box,
+                linear-gradient(135deg, #7c3aed44, #ec489944) border-box;
+    border: 1px solid transparent;
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+  }
+}
