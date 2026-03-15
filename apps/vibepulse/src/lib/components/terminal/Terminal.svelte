@@ -131,11 +131,10 @@
       <TerminalIcon size={14} class="text-vp-purple-400" />
       <span class="text-xs font-medium text-vp-text-secondary font-mono">gsd-terminal</span>
     </div>
-    <!-- macOS-style traffic lights -->
-    <div class="flex items-center gap-1.5">
-      <button class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors" aria-label="Close" />
-      <button class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors" aria-label="Minimize" />
-      <button class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors" aria-label="Maximize" />
+    <div class="flex items-center gap-1.5" aria-hidden="true" role="presentation">
+      <div class="w-3 h-3 rounded-full bg-red-500" />
+      <div class="w-3 h-3 rounded-full bg-yellow-500" />
+      <div class="w-3 h-3 rounded-full bg-green-500" />
     </div>
   </div>
 

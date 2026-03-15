@@ -32,27 +32,25 @@ pub async fn execute_command(command: &str) -> Result<CommandOutput> {
     let mut stdout_reader = BufReader::new(stdout_handle).lines();
     let mut stderr_reader = BufReader::new(stderr_handle).lines();
 
-    // Read until both streams are closed
-    loop {
+    // Read both streams concurrently until both are exhausted.
+    let mut stdout_done = false;
+    let mut stderr_done = false;
+
+    while !stdout_done || !stderr_done {
         tokio::select! {
-            line = stdout_reader.next_line() => {
+            line = stdout_reader.next_line(), if !stdout_done => {
                 match line? {
                     Some(l) => stdout_lines.push(l),
-                    None => break,
+                    None => stdout_done = true,
                 }
             }
-            line = stderr_reader.next_line() => {
+            line = stderr_reader.next_line(), if !stderr_done => {
                 match line? {
                     Some(l) => stderr_lines.push(l),
-                    None => {}
+                    None => stderr_done = true,
                 }
             }
         }
-    }
-
-    // Drain remaining stderr
-    while let Some(l) = stderr_reader.next_line().await? {
-        stderr_lines.push(l);
     }
 
     let status = child.wait().await?;
