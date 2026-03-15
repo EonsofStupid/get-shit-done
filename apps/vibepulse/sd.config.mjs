@@ -38,6 +38,13 @@ StyleDictionary.registerFormat({
 })
 
 /**
+ * Escape a string for safe embedding inside a single-quoted TS string literal.
+ */
+function escapeForSingleQuote(str) {
+  return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
+}
+
+/**
  * Custom format: TypeScript declarations for all tokens
  */
 StyleDictionary.registerFormat({
@@ -46,9 +53,9 @@ StyleDictionary.registerFormat({
     const tokenEntries = dictionary.allTokens.map((token) => {
       const name = token.path.join('-')
       const cssVar = `--${name}`
-      const desc = (token.$description ?? '').replace(/'/g, "\\'")
+      const desc = escapeForSingleQuote(token.$description ?? '')
       const styleId = token.$extensions?.['com.vibepulse.styleId'] ?? name
-      const val = resolveValue(token).replace(/'/g, "\\'")
+      const val = escapeForSingleQuote(resolveValue(token))
       return `  '${cssVar}': { value: '${val}', description: '${desc}', styleId: '${styleId}' }`
     })
 
