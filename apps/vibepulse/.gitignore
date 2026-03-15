@@ -1,0 +1,20 @@
+# Rust build artifacts
+src-tauri/target/
+
+# Node.js
+node_modules/
+.svelte-kit/
+
+# Build output
+build/
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/settings.json
+*.swp
+
+# Tauri
+src-tauri/gen/

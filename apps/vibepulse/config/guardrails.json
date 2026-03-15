@@ -1,0 +1,62 @@
+[
+  {
+    "id": "no-rm-rf",
+    "name": "Dangerous Deletion",
+    "description": "Prevents accidental recursive force deletion",
+    "pattern": "\\brm\\s+-[a-zA-Z]*r[a-zA-Z]*f\\b",
+    "severity": "error",
+    "message": "Recursive force delete (rm -rf) is irreversible. This is blocked.",
+    "suggestion": "Move files to /tmp first, or use a safer deletion command.",
+    "blockExecution": true
+  },
+  {
+    "id": "no-sudo-dangerous",
+    "name": "Dangerous sudo",
+    "description": "Blocks dangerous sudo commands",
+    "pattern": "\\bsudo\\s+(rm|chmod\\s+777|dd\\s+if)",
+    "severity": "error",
+    "message": "Potentially dangerous sudo command detected.",
+    "suggestion": "Review this command carefully. Are you sure you need sudo here?",
+    "blockExecution": true
+  },
+  {
+    "id": "gsd-phase-zero",
+    "name": "Invalid Phase Number",
+    "description": "GSD phases start at 1, not 0",
+    "pattern": "/gsd:(execute-phase|verify-work|execute-milestone)\\s+0\\b",
+    "severity": "error",
+    "message": "Phase 0 does not exist. GSD phases start at 1.",
+    "suggestion": "Use /gsd:execute-phase 1 to start from the beginning.",
+    "blockExecution": true
+  },
+  {
+    "id": "gsd-unknown-command",
+    "name": "Unknown GSD Command",
+    "description": "Warns when a /gsd: command is not recognized",
+    "pattern": "^/gsd:(?!new-project|execute-phase|execute-milestone|verify-work|update-plan|research|add-phase|add-milestone|commit|verify-health)\\S+",
+    "severity": "warning",
+    "message": "Unknown GSD command. This may not be a valid command.",
+    "suggestion": "Run /gsd:verify-health to check your GSD installation.",
+    "blockExecution": false
+  },
+  {
+    "id": "gsd-missing-phase-arg",
+    "name": "Missing Phase Argument",
+    "description": "Warns when execute-phase or verify-work is called without an argument",
+    "pattern": "^/gsd:(execute-phase|verify-work)\\s*$",
+    "severity": "warning",
+    "message": "This command requires a phase number argument.",
+    "suggestion": "Example: /gsd:execute-phase 1",
+    "blockExecution": false
+  },
+  {
+    "id": "force-push",
+    "name": "Force Push Detected",
+    "description": "Warns about git force push which rewrites remote history",
+    "pattern": "\\bgit\\s+push\\s+.*--force\\b|\\bgit\\s+push\\s+.*-f\\b",
+    "severity": "warning",
+    "message": "Force push detected. This will rewrite remote history.",
+    "suggestion": "Consider using --force-with-lease for safer force pushes.",
+    "blockExecution": false
+  }
+]

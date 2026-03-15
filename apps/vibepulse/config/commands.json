@@ -1,0 +1,146 @@
+[
+  {
+    "id": "new-project",
+    "name": "/gsd:new-project",
+    "description": "Initialize a new GSD project with spec, research and planning structure",
+    "usage": "/gsd:new-project",
+    "category": "project",
+    "args": [],
+    "examples": ["/gsd:new-project"],
+    "tags": ["init", "setup"],
+    "guardrails": []
+  },
+  {
+    "id": "execute-phase",
+    "name": "/gsd:execute-phase",
+    "description": "Execute all tasks in a specific phase",
+    "usage": "/gsd:execute-phase <phase_number>",
+    "category": "phase",
+    "args": [
+      {
+        "name": "phase_number",
+        "type": "number",
+        "required": true,
+        "description": "Phase number to execute (starts at 1)"
+      }
+    ],
+    "examples": ["/gsd:execute-phase 1", "/gsd:execute-phase 2"],
+    "tags": ["execute", "phase"],
+    "guardrails": ["phase-order", "gsd-phase-zero"]
+  },
+  {
+    "id": "execute-milestone",
+    "name": "/gsd:execute-milestone",
+    "description": "Execute a specific milestone within a phase",
+    "usage": "/gsd:execute-milestone <phase> <milestone>",
+    "category": "milestone",
+    "args": [
+      {
+        "name": "phase",
+        "type": "number",
+        "required": true,
+        "description": "Phase number"
+      },
+      {
+        "name": "milestone",
+        "type": "number",
+        "required": true,
+        "description": "Milestone number within the phase"
+      }
+    ],
+    "examples": ["/gsd:execute-milestone 1 2", "/gsd:execute-milestone 2 1"],
+    "tags": ["execute", "milestone"],
+    "guardrails": ["phase-order"]
+  },
+  {
+    "id": "verify-work",
+    "name": "/gsd:verify-work",
+    "description": "Verify completed work against the spec for a phase",
+    "usage": "/gsd:verify-work <phase_number>",
+    "category": "verification",
+    "args": [
+      {
+        "name": "phase_number",
+        "type": "number",
+        "required": true,
+        "description": "Phase number to verify"
+      }
+    ],
+    "examples": ["/gsd:verify-work 1", "/gsd:verify-work 2"],
+    "tags": ["verify", "check", "quality"],
+    "guardrails": []
+  },
+  {
+    "id": "update-plan",
+    "name": "/gsd:update-plan",
+    "description": "Update the planning documents to reflect current progress",
+    "usage": "/gsd:update-plan",
+    "category": "docs",
+    "args": [],
+    "examples": ["/gsd:update-plan"],
+    "tags": ["docs", "plan", "update"],
+    "guardrails": []
+  },
+  {
+    "id": "research",
+    "name": "/gsd:research",
+    "description": "Conduct and document research for the project",
+    "usage": "/gsd:research",
+    "category": "docs",
+    "args": [],
+    "examples": ["/gsd:research"],
+    "tags": ["research", "docs"],
+    "guardrails": []
+  },
+  {
+    "id": "add-phase",
+    "name": "/gsd:add-phase",
+    "description": "Add a new phase to the project plan",
+    "usage": "/gsd:add-phase",
+    "category": "phase",
+    "args": [],
+    "examples": ["/gsd:add-phase"],
+    "tags": ["phase", "plan", "add"],
+    "guardrails": []
+  },
+  {
+    "id": "add-milestone",
+    "name": "/gsd:add-milestone",
+    "description": "Add a new milestone to an existing phase",
+    "usage": "/gsd:add-milestone <phase_number>",
+    "category": "milestone",
+    "args": [
+      {
+        "name": "phase_number",
+        "type": "number",
+        "required": true,
+        "description": "Phase to add milestone to"
+      }
+    ],
+    "examples": ["/gsd:add-milestone 2"],
+    "tags": ["milestone", "plan", "add"],
+    "guardrails": []
+  },
+  {
+    "id": "commit",
+    "name": "/gsd:commit",
+    "description": "Create a structured commit with phase/milestone context",
+    "usage": "/gsd:commit",
+    "category": "git",
+    "args": [],
+    "examples": ["/gsd:commit"],
+    "tags": ["git", "commit", "version-control"],
+    "guardrails": []
+  },
+  {
+    "id": "verify-health",
+    "name": "/gsd:verify-health",
+    "description": "Check overall project health and configuration",
+    "usage": "/gsd:verify-health",
+    "category": "utility",
+    "args": [],
+    "examples": ["/gsd:verify-health"],
+    "tags": ["health", "check", "diagnostic"],
+    "guardrails": []
+  }
+]
