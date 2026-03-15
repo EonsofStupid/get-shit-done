@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/*
+ * Vibepulse Design System - CSS Custom Properties
+ * Layer 1: Foundation tokens as CSS variables
+ * Used via Tailwind v4 arbitrary value syntax: text-[--vp-primary]
+ */
+
+:root {
+  /* Brand colors */
+  --vp-primary: #7c3aed;
+  --vp-primary-light: #a78bfa;
+  --vp-primary-dark: #5b21b6;
+  --vp-accent: #ec4899;
+  --vp-accent-light: #f472b6;
+  --vp-accent-dark: #be185d;
+
+  /* Feedback colors */
+  --vp-success: #10b981;
+  --vp-warning: #f59e0b;
+  --vp-danger: #ef4444;
+  --vp-info: #06b6d4;
+
+  /* Neutral colors */
+  --vp-neutral: #334155;
+  --vp-muted: #64748b;
+  --vp-dark: #0f172a;
+  --vp-light: #f1f5f9;
+
+  /* Surface colors */
+  --vp-surface: #1e293b;
+  --vp-surface-secondary: #334155;
+  --vp-surface-tertiary: #475569;
+
+  /* Border colors */
+  --vp-border: #475569;
+  --vp-border-light: #64748b;
+  --vp-border-dark: #334155;
+
+  /* Spacing scale */
+  --vp-xs: 0.25rem;
+  --vp-sm: 0.5rem;
+  --vp-md: 1rem;
+  --vp-lg: 1.5rem;
+  --vp-xl: 2rem;
+  --vp-2xl: 3rem;
+  --vp-3xl: 4rem;
+  --vp-4xl: 6rem;
+}
+
+/*
+ * Base reset & defaults
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--vp-dark);
+  color: var(--vp-light);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Monospace font for terminal/code */
+code,
+pre,
+.font-mono {
+  font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-border-light);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--vp-primary);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--vp-primary);
+  color: var(--vp-light);
+}

@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+.svelte-kit/
+target/
+
+# Dependencies  
+node_modules/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Tauri
+src-tauri/target/
+src-tauri/gen/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
