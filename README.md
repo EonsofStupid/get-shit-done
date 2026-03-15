@@ -39,7 +39,7 @@ npx get-shit-done-cc@latest
 
 **Trusted by engineers at Amazon, Google, Shopify, and Webflow.**
 
-[Why I Built This](#why-i-built-this) · [How It Works](#how-it-works) · [Commands](#commands) · [Why It Works](#why-it-works) · [User Guide](docs/USER-GUIDE.md)
+[Why I Built This](#why-i-built-this) · [How It Works](#how-it-works) · [Commands](#commands) · [Why It Works](#why-it-works) · [Vibepulse Desktop](#vibepulse-gsd-desktop) · [User Guide](docs/USER-GUIDE.md)
 
 </div>
 
@@ -679,6 +679,45 @@ These community ports pioneered multi-runtime support:
 |---------|----------|-------------|
 | [gsd-opencode](https://github.com/rokicool/gsd-opencode) | OpenCode | Original OpenCode adaptation |
 | gsd-gemini (archived) | Gemini CLI | Original Gemini adaptation by uberfuzzy |
+
+---
+
+## Vibepulse GSD Desktop
+
+GSD is powerful. But it's a CLI system — and CLIs have a learning curve. **Vibepulse GSD** is a native desktop application that wraps the entire GSD workflow in a beautiful, layman-friendly UI built to make spec-driven development accessible to anyone.
+
+> **"I want to use GSD but I'm intimidated by the CLI."**  
+> Vibepulse is the answer to that.
+
+### What It Does
+
+Vibepulse GSD is a **fully enclosed desktop application** — SvelteKit frontend, Tauri native shell, Rust backend. It doesn't just wrap a terminal. It teaches you while you work.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  VIBEPULSE GSD DESKTOP                                  │
+├──────────────┬──────────────────────────────────────────┤
+│              │  ┌─── Floating Command Buttons ────────┐ │
+│  Dashboard   │  │  [Execute Phase 1] [Verify] [Plan]  │ │
+│  Tutorial    │  └─────────────────────────────────────┘ │
+│  Commands    │  ┌─── Terminal ────────────────────────┐ │
+│  Guardrails  │  │  $ /gsd:execute-phase 1             │ │
+│  Prefs       │  │  ● Running Phase 1...               │ │
+│              │  │  ✓ Plan 01 complete                  │ │
+│              │  └─────────────────────────────────────┘ │
+└──────────────┴──────────────────────────────────────────┘
+```
+
+**Key ideas:**
+
+- **Commands float above the terminal** — Click a button, the command types itself in. You see what you're running. You learn by doing.
+- **Guardrails run before execution** — The Rust backend validates every command before it touches your project. Mistakes are caught, not made.
+- **COSTAR-aligned prompt recipes** — The UI captures your project context, objective, style, tone, audience, and response preferences and feeds them into every GSD command as structured prompts.
+- **Learning mode** — Tooltips, step-by-step tutorials, and inline explanations make every command understandable. First-time users productive in under 5 minutes.
+
+### The Full Roadmap
+
+See [`apps/vibepulse/README.md`](apps/vibepulse/README.md) for the complete architecture, interaction component map, COSTAR alignment documentation, and phased product roadmap.
 
 ---
 
