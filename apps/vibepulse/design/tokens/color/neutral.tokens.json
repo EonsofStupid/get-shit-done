@@ -1,0 +1,102 @@
+{
+  "vp": {
+    "color": {
+      "neutral": {
+        "base": {
+          "$type": "color",
+          "$value": "#334155",
+          "$description": "Neutral slate-700",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-neutral-base"
+          }
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "#64748b",
+          "$description": "Muted slate-500",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-neutral-muted"
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#0f172a",
+          "$description": "Dark slate-900 — background",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-neutral-dark"
+          }
+        },
+        "light": {
+          "$type": "color",
+          "$value": "#f1f5f9",
+          "$description": "Light slate-100 — text on dark",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-neutral-light"
+          }
+        }
+      },
+      "surface": {
+        "primary": {
+          "$type": "color",
+          "$value": "#1e293b",
+          "$description": "Primary surface color",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-surface-primary"
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "#334155",
+          "$description": "Secondary surface",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-surface-secondary"
+          }
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "#475569",
+          "$description": "Tertiary surface",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-surface-tertiary"
+          }
+        }
+      },
+      "border": {
+        "base": {
+          "$type": "color",
+          "$value": "#475569",
+          "$description": "Standard border color",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-border-base"
+          }
+        },
+        "light": {
+          "$type": "color",
+          "$value": "#64748b",
+          "$description": "Light border",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-border-light"
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#334155",
+          "$description": "Dark border",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "neutral",
+            "com.vibepulse.styleId": "color-border-dark"
+          }
+        }
+      }
+    }
+  }
+}

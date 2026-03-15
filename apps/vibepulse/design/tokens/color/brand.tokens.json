@@ -1,0 +1,62 @@
+{
+  "vp": {
+    "color": {
+      "brand": {
+        "primary": {
+          "$type": "color",
+          "$value": "#7c3aed",
+          "$description": "Primary brand purple",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "brand",
+            "com.vibepulse.styleId": "color-brand-primary"
+          }
+        },
+        "primary-light": {
+          "$type": "color",
+          "$value": "#a78bfa",
+          "$description": "Lighter primary for hover states",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "brand",
+            "com.vibepulse.styleId": "color-brand-primary-light"
+          }
+        },
+        "primary-dark": {
+          "$type": "color",
+          "$value": "#5b21b6",
+          "$description": "Darker primary for active states",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "brand",
+            "com.vibepulse.styleId": "color-brand-primary-dark"
+          }
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "#ec4899",
+          "$description": "Accent pink for highlights",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "brand",
+            "com.vibepulse.styleId": "color-brand-accent"
+          }
+        },
+        "accent-light": {
+          "$type": "color",
+          "$value": "#f472b6",
+          "$description": "Lighter accent for hover",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "brand",
+            "com.vibepulse.styleId": "color-brand-accent-light"
+          }
+        },
+        "accent-dark": {
+          "$type": "color",
+          "$value": "#be185d",
+          "$description": "Darker accent for active",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "brand",
+            "com.vibepulse.styleId": "color-brand-accent-dark"
+          }
+        }
+      }
+    }
+  }
+}

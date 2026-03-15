@@ -8,6 +8,8 @@
  * Layer 4: Components
  * Layer 5: Blocks
  * Layer 6: Features
+ * Layer 7: Design (registry + manifest)
+ * Layer 8: Interactions (motion, transition, typography effects)
  */
 
 // Foundation
@@ -27,3 +29,9 @@ export * from './blocks'
 
 // Features
 export * from './features'
+
+// Design System Registry & Manifest
+export * from './design'
+
+// Interactions (motion, transition, typography effects)
+export * from './interactions'

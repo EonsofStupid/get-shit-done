@@ -1,0 +1,91 @@
+{
+  "vp": {
+    "motion": {
+      "duration": {
+        "instant": {
+          "$type": "duration",
+          "$value": "50ms",
+          "$description": "Instant feedback — micro-interactions",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-duration-instant",
+            "com.vibepulse.category": "duration"
+          }
+        },
+        "fast": {
+          "$type": "duration",
+          "$value": "150ms",
+          "$description": "Fast transitions — hover, focus",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-duration-fast",
+            "com.vibepulse.category": "duration"
+          }
+        },
+        "normal": {
+          "$type": "duration",
+          "$value": "250ms",
+          "$description": "Normal transitions — expand, collapse",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-duration-normal",
+            "com.vibepulse.category": "duration"
+          }
+        },
+        "slow": {
+          "$type": "duration",
+          "$value": "400ms",
+          "$description": "Slow transitions — page-level animations",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-duration-slow",
+            "com.vibepulse.category": "duration"
+          }
+        },
+        "deliberate": {
+          "$type": "duration",
+          "$value": "700ms",
+          "$description": "Deliberate entrance/exit animations",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-duration-deliberate",
+            "com.vibepulse.category": "duration"
+          }
+        }
+      },
+      "easing": {
+        "default": {
+          "$type": "cubicBezier",
+          "$value": [0.4, 0, 0.2, 1],
+          "$description": "Default easing — ease-in-out",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-easing-default",
+            "com.vibepulse.category": "easing"
+          }
+        },
+        "in": {
+          "$type": "cubicBezier",
+          "$value": [0.4, 0, 1, 1],
+          "$description": "Ease-in for exits",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-easing-in",
+            "com.vibepulse.category": "easing"
+          }
+        },
+        "out": {
+          "$type": "cubicBezier",
+          "$value": [0, 0, 0.2, 1],
+          "$description": "Ease-out for entrances",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-easing-out",
+            "com.vibepulse.category": "easing"
+          }
+        },
+        "spring": {
+          "$type": "cubicBezier",
+          "$value": [0.175, 0.885, 0.32, 1.275],
+          "$description": "Spring overshoot — playful interactions",
+          "$extensions": {
+            "com.vibepulse.styleId": "motion-easing-spring",
+            "com.vibepulse.category": "easing"
+          }
+        }
+      }
+    }
+  }
+}
