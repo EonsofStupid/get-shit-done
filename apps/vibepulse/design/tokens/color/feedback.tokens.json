@@ -1,0 +1,44 @@
+{
+  "vp": {
+    "color": {
+      "feedback": {
+        "success": {
+          "$type": "color",
+          "$value": "#10b981",
+          "$description": "Success/completion green",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "feedback",
+            "com.vibepulse.styleId": "color-feedback-success"
+          }
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "#f59e0b",
+          "$description": "Warning amber",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "feedback",
+            "com.vibepulse.styleId": "color-feedback-warning"
+          }
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "#ef4444",
+          "$description": "Error/danger red",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "feedback",
+            "com.vibepulse.styleId": "color-feedback-danger"
+          }
+        },
+        "info": {
+          "$type": "color",
+          "$value": "#06b6d4",
+          "$description": "Info cyan",
+          "$extensions": {
+            "com.vibepulse.semanticRole": "feedback",
+            "com.vibepulse.styleId": "color-feedback-info"
+          }
+        }
+      }
+    }
+  }
+}

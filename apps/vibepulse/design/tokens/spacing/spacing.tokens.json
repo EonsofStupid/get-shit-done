@@ -1,0 +1,78 @@
+{
+  "vp": {
+    "spacing": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "0.25rem",
+        "$description": "4px — extra small spacing",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-xs",
+          "com.vibepulse.px": 4
+        }
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "0.5rem",
+        "$description": "8px — small spacing",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-sm",
+          "com.vibepulse.px": 8
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "1rem",
+        "$description": "16px — medium/base spacing",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-md",
+          "com.vibepulse.px": 16
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "1.5rem",
+        "$description": "24px — large spacing",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-lg",
+          "com.vibepulse.px": 24
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "2rem",
+        "$description": "32px — extra large spacing",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-xl",
+          "com.vibepulse.px": 32
+        }
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "3rem",
+        "$description": "48px — 2x extra large",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-2xl",
+          "com.vibepulse.px": 48
+        }
+      },
+      "3xl": {
+        "$type": "dimension",
+        "$value": "4rem",
+        "$description": "64px — 3x extra large",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-3xl",
+          "com.vibepulse.px": 64
+        }
+      },
+      "4xl": {
+        "$type": "dimension",
+        "$value": "6rem",
+        "$description": "96px — 4x extra large",
+        "$extensions": {
+          "com.vibepulse.styleId": "spacing-4xl",
+          "com.vibepulse.px": 96
+        }
+      }
+    }
+  }
+}

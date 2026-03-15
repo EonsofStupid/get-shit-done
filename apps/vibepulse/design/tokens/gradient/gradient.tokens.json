@@ -1,0 +1,79 @@
+{
+  "vp": {
+    "gradient": {
+      "brand-primary": {
+        "$type": "gradient",
+        "$value": [
+          { "color": "#7c3aed", "position": 0 },
+          { "color": "#ec4899", "position": 1 }
+        ],
+        "$description": "Primary brand gradient — purple to pink",
+        "$extensions": {
+          "com.vibepulse.styleId": "gradient-brand-primary",
+          "com.vibepulse.cssValue": "linear-gradient(135deg, #7c3aed, #ec4899)"
+        }
+      },
+      "brand-accent": {
+        "$type": "gradient",
+        "$value": [
+          { "color": "#ec4899", "position": 0 },
+          { "color": "#f59e0b", "position": 1 }
+        ],
+        "$description": "Accent gradient — pink to amber",
+        "$extensions": {
+          "com.vibepulse.styleId": "gradient-brand-accent",
+          "com.vibepulse.cssValue": "linear-gradient(135deg, #ec4899, #f59e0b)"
+        }
+      },
+      "surface-dark": {
+        "$type": "gradient",
+        "$value": [
+          { "color": "#0f172a", "position": 0 },
+          { "color": "#1e293b", "position": 1 }
+        ],
+        "$description": "Dark surface gradient",
+        "$extensions": {
+          "com.vibepulse.styleId": "gradient-surface-dark",
+          "com.vibepulse.cssValue": "linear-gradient(180deg, #0f172a, #1e293b)"
+        }
+      },
+      "surface-glow": {
+        "$type": "gradient",
+        "$value": [
+          { "color": "#1e293b", "position": 0 },
+          { "color": "#334155", "position": 0.5 },
+          { "color": "#1e293b", "position": 1 }
+        ],
+        "$description": "Surface glow — subtle center highlight",
+        "$extensions": {
+          "com.vibepulse.styleId": "gradient-surface-glow",
+          "com.vibepulse.cssValue": "linear-gradient(180deg, #1e293b, #334155, #1e293b)"
+        }
+      },
+      "success": {
+        "$type": "gradient",
+        "$value": [
+          { "color": "#10b981", "position": 0 },
+          { "color": "#06b6d4", "position": 1 }
+        ],
+        "$description": "Success/positive gradient — green to cyan",
+        "$extensions": {
+          "com.vibepulse.styleId": "gradient-success",
+          "com.vibepulse.cssValue": "linear-gradient(135deg, #10b981, #06b6d4)"
+        }
+      },
+      "danger": {
+        "$type": "gradient",
+        "$value": [
+          { "color": "#ef4444", "position": 0 },
+          { "color": "#ec4899", "position": 1 }
+        ],
+        "$description": "Danger/error gradient — red to pink",
+        "$extensions": {
+          "com.vibepulse.styleId": "gradient-danger",
+          "com.vibepulse.cssValue": "linear-gradient(135deg, #ef4444, #ec4899)"
+        }
+      }
+    }
+  }
+}

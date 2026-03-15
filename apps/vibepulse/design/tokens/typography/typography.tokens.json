@@ -1,0 +1,140 @@
+{
+  "vp": {
+    "font": {
+      "family": {
+        "sans": {
+          "$type": "fontFamily",
+          "$value": ["Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+          "$description": "Primary sans-serif font stack",
+          "$extensions": {
+            "com.vibepulse.styleId": "font-family-sans"
+          }
+        },
+        "mono": {
+          "$type": "fontFamily",
+          "$value": ["Fira Code", "Cascadia Code", "JetBrains Mono", "ui-monospace", "monospace"],
+          "$description": "Monospace font stack for terminal/code",
+          "$extensions": {
+            "com.vibepulse.styleId": "font-family-mono"
+          }
+        }
+      },
+      "size": {
+        "xs": {
+          "$type": "dimension",
+          "$value": "0.75rem",
+          "$description": "12px — extra small text",
+          "$extensions": { "com.vibepulse.styleId": "font-size-xs", "com.vibepulse.px": 12 }
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": "0.875rem",
+          "$description": "14px — small text",
+          "$extensions": { "com.vibepulse.styleId": "font-size-sm", "com.vibepulse.px": 14 }
+        },
+        "base": {
+          "$type": "dimension",
+          "$value": "1rem",
+          "$description": "16px — base text",
+          "$extensions": { "com.vibepulse.styleId": "font-size-base", "com.vibepulse.px": 16 }
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "1.125rem",
+          "$description": "18px — large text",
+          "$extensions": { "com.vibepulse.styleId": "font-size-lg", "com.vibepulse.px": 18 }
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": "1.25rem",
+          "$description": "20px — extra large text",
+          "$extensions": { "com.vibepulse.styleId": "font-size-xl", "com.vibepulse.px": 20 }
+        },
+        "2xl": {
+          "$type": "dimension",
+          "$value": "1.5rem",
+          "$description": "24px — heading large",
+          "$extensions": { "com.vibepulse.styleId": "font-size-2xl", "com.vibepulse.px": 24 }
+        },
+        "3xl": {
+          "$type": "dimension",
+          "$value": "1.875rem",
+          "$description": "30px — heading xlarge",
+          "$extensions": { "com.vibepulse.styleId": "font-size-3xl", "com.vibepulse.px": 30 }
+        }
+      },
+      "weight": {
+        "normal": {
+          "$type": "fontWeight",
+          "$value": 400,
+          "$description": "Normal weight",
+          "$extensions": { "com.vibepulse.styleId": "font-weight-normal" }
+        },
+        "medium": {
+          "$type": "fontWeight",
+          "$value": 500,
+          "$description": "Medium weight",
+          "$extensions": { "com.vibepulse.styleId": "font-weight-medium" }
+        },
+        "semibold": {
+          "$type": "fontWeight",
+          "$value": 600,
+          "$description": "Semibold weight",
+          "$extensions": { "com.vibepulse.styleId": "font-weight-semibold" }
+        },
+        "bold": {
+          "$type": "fontWeight",
+          "$value": 700,
+          "$description": "Bold weight",
+          "$extensions": { "com.vibepulse.styleId": "font-weight-bold" }
+        }
+      },
+      "lineHeight": {
+        "tight": {
+          "$type": "number",
+          "$value": 1.2,
+          "$description": "Tight line height — headings",
+          "$extensions": { "com.vibepulse.styleId": "line-height-tight" }
+        },
+        "normal": {
+          "$type": "number",
+          "$value": 1.5,
+          "$description": "Normal line height — body",
+          "$extensions": { "com.vibepulse.styleId": "line-height-normal" }
+        },
+        "relaxed": {
+          "$type": "number",
+          "$value": 1.75,
+          "$description": "Relaxed line height — readable blocks",
+          "$extensions": { "com.vibepulse.styleId": "line-height-relaxed" }
+        },
+        "loose": {
+          "$type": "number",
+          "$value": 2,
+          "$description": "Loose line height — spacious layout",
+          "$extensions": { "com.vibepulse.styleId": "line-height-loose" }
+        }
+      },
+      "letterSpacing": {
+        "tight": {
+          "$type": "dimension",
+          "$value": "-0.02em",
+          "$description": "Tight tracking for large headings",
+          "$extensions": { "com.vibepulse.styleId": "letter-spacing-tight" }
+        },
+        "normal": {
+          "$type": "dimension",
+          "$value": "0em",
+          "$description": "Normal tracking",
+          "$extensions": { "com.vibepulse.styleId": "letter-spacing-normal" }
+        },
+        "wide": {
+          "$type": "dimension",
+          "$value": "0.025em",
+          "$description": "Wide tracking for small caps",
+          "$extensions": { "com.vibepulse.styleId": "letter-spacing-wide" }
+        }
+      }
+    }
+  }
+}
