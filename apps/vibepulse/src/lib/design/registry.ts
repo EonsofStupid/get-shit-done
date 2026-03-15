@@ -30,12 +30,9 @@ export interface RegistryEntry {
 const REGISTRY = new Map<string, RegistryEntry>()
 
 /**
- * Register a style entry. Duplicate styleIds emit a warning and overwrite.
+ * Register a style entry. Duplicate styleIds overwrite silently.
  */
 export function registerEntry(entry: RegistryEntry): void {
-  if (REGISTRY.has(entry.styleId)) {
-    console.warn(`[registry] overwriting "${entry.styleId}"`)
-  }
   REGISTRY.set(entry.styleId, entry)
 }
 
