@@ -1,5 +1,43 @@
 use regex::Regex;
 use serde::{Deserialize, Serialize};
+use std::sync::OnceLock;
+
+/// Compiled regex patterns — each is initialised exactly once.
+fn re_rm_rf() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| {
+        Regex::new(r"\brm\s+-[a-zA-Z]*r[a-zA-Z]*f\b|\brm\s+-[a-zA-Z]*f[a-zA-Z]*r\b")
+            .expect("valid regex")
+    })
+}
+
+fn re_sudo_dangerous() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| {
+        Regex::new(r"\bsudo\s+(rm|chmod\s+777|dd\s+if)").expect("valid regex")
+    })
+}
+
+fn re_phase_zero() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| {
+        Regex::new(r"/gsd:(execute-phase|verify-work|execute-milestone)\s+0\b").expect("valid regex")
+    })
+}
+
+fn re_missing_phase_arg() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| {
+        Regex::new(r"^/gsd:(execute-phase|verify-work)\s*$").expect("valid regex")
+    })
+}
+
+fn re_force_push() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| {
+        Regex::new(r"\bgit\s+push\s+.*--force\b|\bgit\s+push\s+.*-f\b").expect("valid regex")
+    })
+}
 
 /// Result of running guardrail checks against a command string.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -70,8 +108,7 @@ fn all_rules() -> Vec<GuardrailRule> {
             severity: GuardrailSeverity::Error,
             block_execution: true,
             check: |cmd| {
-                let re = Regex::new(r"\brm\s+-[a-zA-Z]*r[a-zA-Z]*f\b|\brm\s+-[a-zA-Z]*f[a-zA-Z]*r\b").unwrap();
-                if re.is_match(cmd) {
+                if re_rm_rf().is_match(cmd) {
                     Some((
                         "Recursive force delete detected (rm -rf). This is irreversible.".into(),
                         Some("Move files to /tmp first or use a safer deletion command.".into()),
@@ -87,8 +124,7 @@ fn all_rules() -> Vec<GuardrailRule> {
             severity: GuardrailSeverity::Error,
             block_execution: true,
             check: |cmd| {
-                let re = Regex::new(r"\bsudo\s+(rm|chmod\s+777|dd\s+if)").unwrap();
-                if re.is_match(cmd) {
+                if re_sudo_dangerous().is_match(cmd) {
                     Some((
                         "Potentially dangerous sudo command detected.".into(),
                         Some("Review this command carefully before proceeding.".into()),
@@ -105,8 +141,7 @@ fn all_rules() -> Vec<GuardrailRule> {
             severity: GuardrailSeverity::Error,
             block_execution: true,
             check: |cmd| {
-                let re = Regex::new(r"/gsd:(execute-phase|verify-work|execute-milestone)\s+0\b").unwrap();
-                if re.is_match(cmd) {
+                if re_phase_zero().is_match(cmd) {
                     Some((
                         "Phase 0 does not exist. GSD phases start at 1.".into(),
                         Some("Use /gsd:execute-phase 1 to start from the beginning.".into()),
@@ -154,8 +189,7 @@ fn all_rules() -> Vec<GuardrailRule> {
             severity: GuardrailSeverity::Warning,
             block_execution: false,
             check: |cmd| {
-                let re = Regex::new(r"^/gsd:(execute-phase|verify-work)\s*$").unwrap();
-                if re.is_match(cmd.trim()) {
+                if re_missing_phase_arg().is_match(cmd.trim()) {
                     Some((
                         "This command requires a phase number argument.".into(),
                         Some("Example: /gsd:execute-phase 1".into()),
@@ -171,8 +205,7 @@ fn all_rules() -> Vec<GuardrailRule> {
             severity: GuardrailSeverity::Warning,
             block_execution: false,
             check: |cmd| {
-                let re = Regex::new(r"\bgit\s+push\s+.*--force\b|\bgit\s+push\s+.*-f\b").unwrap();
-                if re.is_match(cmd) {
+                if re_force_push().is_match(cmd) {
                     Some((
                         "Force push detected. This rewrites remote history.".into(),
                         Some("Consider using --force-with-lease for safer force pushes.".into()),
