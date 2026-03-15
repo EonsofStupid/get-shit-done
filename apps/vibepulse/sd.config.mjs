@@ -174,7 +174,7 @@ export default {
       buildPath: 'design/styles/',
       files: [
         {
-          destination: 'tokens.d.ts',
+          destination: 'tokens.ts',
           format: 'typescript/vp-declarations',
         },
       ],
