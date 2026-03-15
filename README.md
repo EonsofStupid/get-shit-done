@@ -2,6 +2,8 @@
 
 # GET SHIT DONE
 
+**English** · [简体中文](README.zh-CN.md)
+
 **A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code, OpenCode, Gemini CLI, and Codex.**
 
 **Solves context rot — the quality degradation that happens as Claude fills its context window.**
@@ -80,13 +82,14 @@ npx get-shit-done-cc@latest
 ```
 
 The installer prompts you to choose:
-1. **Runtime** — Claude Code, OpenCode, Gemini, Codex, or all
+1. **Runtime** — Claude Code, OpenCode, Gemini, Codex, Copilot, or all
 2. **Location** — Global (all projects) or local (current project only)
 
 Verify with:
 - Claude Code / Gemini: `/gsd:help`
 - OpenCode: `/gsd-help`
 - Codex: `$gsd-help`
+- Copilot: `/gsd:help`
 
 > [!NOTE]
 > Codex installation uses skills (`skills/gsd-*/SKILL.md`) rather than custom prompts.
@@ -117,12 +120,16 @@ npx get-shit-done-cc --gemini --global   # Install to ~/.gemini/
 npx get-shit-done-cc --codex --global    # Install to ~/.codex/
 npx get-shit-done-cc --codex --local     # Install to ./.codex/
 
+# Copilot (GitHub Copilot CLI)
+npx get-shit-done-cc --copilot --global  # Install to ~/.github/
+npx get-shit-done-cc --copilot --local   # Install to ./.github/
+
 # All runtimes
 npx get-shit-done-cc --all --global      # Install to all directories
 ```
 
 Use `--global` (`-g`) or `--local` (`-l`) to skip the location prompt.
-Use `--claude`, `--opencode`, `--gemini`, `--codex`, or `--all` to skip the runtime prompt.
+Use `--claude`, `--opencode`, `--gemini`, `--codex`, `--copilot`, or `--all` to skip the runtime prompt.
 
 </details>
 
@@ -276,24 +283,24 @@ Walk away, come back to completed work with clean git history.
 Plans are grouped into "waves" based on dependencies. Within each wave, plans run in parallel. Waves run sequentially.
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│  PHASE EXECUTION                                                     │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│  WAVE 1 (parallel)          WAVE 2 (parallel)          WAVE 3       │
+┌────────────────────────────────────────────────────────────────────┐
+│  PHASE EXECUTION                                                   │
+├────────────────────────────────────────────────────────────────────┤
+│                                                                    │
+│  WAVE 1 (parallel)          WAVE 2 (parallel)          WAVE 3      │
 │  ┌─────────┐ ┌─────────┐    ┌─────────┐ ┌─────────┐    ┌─────────┐ │
 │  │ Plan 01 │ │ Plan 02 │ →  │ Plan 03 │ │ Plan 04 │ →  │ Plan 05 │ │
 │  │         │ │         │    │         │ │         │    │         │ │
 │  │ User    │ │ Product │    │ Orders  │ │ Cart    │    │ Checkout│ │
 │  │ Model   │ │ Model   │    │ API     │ │ API     │    │ UI      │ │
 │  └─────────┘ └─────────┘    └─────────┘ └─────────┘    └─────────┘ │
-│       │           │              ↑           ↑              ↑       │
-│       └───────────┴──────────────┴───────────┘              │       │
-│              Dependencies: Plan 03 needs Plan 01            │       │
-│                          Plan 04 needs Plan 02              │       │
-│                          Plan 05 needs Plans 03 + 04        │       │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
+│       │           │              ↑           ↑              ↑      │
+│       └───────────┴──────────────┴───────────┘              │      │
+│              Dependencies: Plan 03 needs Plan 01            │      │
+│                          Plan 04 needs Plan 02              │      │
+│                          Plan 05 needs Plans 03 + 04        │      │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
 ```
 
 **Why waves matter:**
@@ -365,10 +372,16 @@ Then `/gsd:new-milestone` starts the next version — same flow as `new-project`
 Quick mode gives you GSD guarantees (atomic commits, state tracking) with a faster path:
 
 - **Same agents** — Planner + executor, same quality
-- **Skips optional steps** — No research, no plan checker, no verifier
+- **Skips optional steps** — No research, no plan checker, no verifier by default
 - **Separate tracking** — Lives in `.planning/quick/`, not phases
 
-Use for: bug fixes, small features, config changes, one-off tasks.
+**`--discuss` flag:** Lightweight discussion to surface gray areas before planning.
+
+**`--research` flag:** Spawns a focused researcher before planning. Investigates implementation approaches, library options, and pitfalls. Use when you're unsure how to approach a task.
+
+**`--full` flag:** Enables plan-checking (max 2 iterations) and post-execution verification.
+
+Flags are composable: `--discuss --research --full` gives discussion + research + plan-checking + verification.
 
 ```
 /gsd:quick
@@ -477,6 +490,13 @@ You're never locked in. The system adapts.
 | `/gsd:complete-milestone` | Archive milestone, tag release |
 | `/gsd:new-milestone [name]` | Start next version: questions → research → requirements → roadmap |
 
+### UI Design
+
+| Command | What it does |
+|---------|--------------|
+| `/gsd:ui-phase [N]` | Generate UI design contract (UI-SPEC.md) for frontend phases |
+| `/gsd:ui-review [N]` | Retroactive 6-pillar visual audit of implemented frontend code |
+
 ### Navigation
 
 | Command | What it does |
@@ -490,7 +510,7 @@ You're never locked in. The system adapts.
 
 | Command | What it does |
 |---------|--------------|
-| `/gsd:map-codebase` | Analyze existing codebase before new-project |
+| `/gsd:map-codebase [area]` | Analyze existing codebase before new-project |
 
 ### Phase Management
 
@@ -514,12 +534,13 @@ You're never locked in. The system adapts.
 | Command | What it does |
 |---------|--------------|
 | `/gsd:settings` | Configure model profile and workflow agents |
-| `/gsd:set-profile <profile>` | Switch model profile (quality/balanced/budget) |
+| `/gsd:set-profile <profile>` | Switch model profile (quality/balanced/budget/inherit) |
 | `/gsd:add-todo [desc]` | Capture idea for later |
 | `/gsd:check-todos` | List pending todos |
 | `/gsd:debug [desc]` | Systematic debugging with persistent state |
-| `/gsd:quick [--full] [--discuss]` | Execute ad-hoc task with GSD guarantees (`--full` adds plan-checking and verification, `--discuss` gathers context first) |
+| `/gsd:quick [--full] [--discuss] [--research]` | Execute ad-hoc task with GSD guarantees (`--full` adds plan-checking and verification, `--discuss` gathers context first, `--research` investigates approaches before planning) |
 | `/gsd:health [--repair]` | Validate `.planning/` directory integrity, auto-repair with `--repair` |
+| `/gsd:stats` | Display project statistics — phases, plans, requirements, git metrics |
 
 <sup>¹ Contributed by reddit user OracleGreyBeard</sup>
 
@@ -545,11 +566,14 @@ Control which Claude model each agent uses. Balance quality vs token spend.
 | `quality` | Opus | Opus | Sonnet |
 | `balanced` (default) | Opus | Sonnet | Sonnet |
 | `budget` | Sonnet | Sonnet | Haiku |
+| `inherit` | Inherit | Inherit | Inherit |
 
 Switch profiles:
 ```
 /gsd:set-profile budget
 ```
+
+Use `inherit` to follow the current runtime model selection (for example OpenCode `/model`).
 
 Or configure via `/gsd:settings`.
 
@@ -658,11 +682,13 @@ To remove GSD completely:
 npx get-shit-done-cc --claude --global --uninstall
 npx get-shit-done-cc --opencode --global --uninstall
 npx get-shit-done-cc --codex --global --uninstall
+npx get-shit-done-cc --copilot --global --uninstall
 
 # Local installs (current project)
 npx get-shit-done-cc --claude --local --uninstall
 npx get-shit-done-cc --opencode --local --uninstall
 npx get-shit-done-cc --codex --local --uninstall
+npx get-shit-done-cc --copilot --local --uninstall
 ```
 
 This removes all GSD commands, agents, hooks, and settings while preserving your other configurations.

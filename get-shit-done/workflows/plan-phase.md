@@ -242,6 +242,13 @@ Skip if `nyquist_validation_enabled` is false OR `research_enabled` is false.
 
 If `research_enabled` is false and `nyquist_validation_enabled` is true: warn "Nyquist validation enabled but research disabled — VALIDATION.md cannot be created without RESEARCH.md. Plans will lack validation requirements (Dimension 8)." Continue to step 6.
 
+**But Nyquist is not applicable for this run** when all of the following are true:
+- `research_enabled` is false
+- `has_research` is false
+- no `--research` flag was provided
+
+In that case: **skip validation-strategy creation entirely**. Do **not** expect `RESEARCH.md` or `VALIDATION.md` for this run, and continue to Step 6.
+
 ```bash
 grep -l "## Validation Architecture" "${PHASE_DIR}"/*-RESEARCH.md 2>/dev/null
 ```
@@ -255,9 +262,49 @@ grep -l "## Validation Architecture" "${PHASE_DIR}"/*-RESEARCH.md 2>/dev/null
 test -f "${PHASE_DIR}/${PADDED_PHASE}-VALIDATION.md" && echo "VALIDATION_CREATED=true" || echo "VALIDATION_CREATED=false"
 ```
 5. If `VALIDATION_CREATED=false`: STOP — do not proceed to Step 6
-6. If `commit_docs`: `commit-docs "docs(phase-${PHASE}): add validation strategy"`
+6. If `commit_docs`: `commit "docs(phase-${PHASE}): add validation strategy"`
 
 **If not found:** Warn and continue — plans may fail Dimension 8.
+
+## 5.6. UI Design Contract Gate
+
+> Skip if `workflow.ui_phase` is explicitly `false` AND `workflow.ui_safety_gate` is explicitly `false` in `.planning/config.json`. If keys are absent, treat as enabled.
+
+```bash
+UI_PHASE_CFG=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" config-get workflow.ui_phase 2>/dev/null || echo "true")
+UI_GATE_CFG=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" config-get workflow.ui_safety_gate 2>/dev/null || echo "true")
+```
+
+**If both are `false`:** Skip to step 6.
+
+Check if phase has frontend indicators:
+
+```bash
+PHASE_SECTION=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" roadmap get-phase "${PHASE}" 2>/dev/null)
+echo "$PHASE_SECTION" | grep -iE "UI|interface|frontend|component|layout|page|screen|view|form|dashboard|widget" > /dev/null 2>&1
+HAS_UI=$?
+```
+
+**If `HAS_UI` is 0 (frontend indicators found):**
+
+Check for existing UI-SPEC:
+```bash
+UI_SPEC_FILE=$(ls "${PHASE_DIR}"/*-UI-SPEC.md 2>/dev/null | head -1)
+```
+
+**If UI-SPEC.md found:** Set `UI_SPEC_PATH=$UI_SPEC_FILE`. Display: `Using UI design contract: ${UI_SPEC_PATH}`
+
+**If UI-SPEC.md missing AND `UI_GATE_CFG` is `true`:**
+
+Use AskUserQuestion:
+- header: "UI Design Contract"
+- question: "Phase {N} has frontend indicators but no UI-SPEC.md. Generate a design contract before planning?"
+- options:
+  - "Generate UI-SPEC first" → Display: "Run `/gsd:ui-phase {N}` then re-run `/gsd:plan-phase {N}`". Exit workflow.
+  - "Continue without UI-SPEC" → Continue to step 6.
+  - "Not a frontend phase" → Continue to step 6.
+
+**If `HAS_UI` is 1 (no frontend indicators):** Skip silently to step 6.
 
 ## 6. Check Existing Plans
 
@@ -285,13 +332,21 @@ CONTEXT_PATH=$(printf '%s\n' "$INIT" | jq -r '.context_path // empty')
 
 Skip if `nyquist_validation_enabled` is false OR `research_enabled` is false.
 
+Also skip if all of the following are true:
+- `research_enabled` is false
+- `has_research` is false
+- no `--research` flag was provided
+
+In that no-research path, Nyquist artifacts are **not required** for this run.
+
 ```bash
 VALIDATION_EXISTS=$(ls "${PHASE_DIR}"/*-VALIDATION.md 2>/dev/null | head -1)
 ```
 
-If missing and Nyquist enabled — ask user:
-1. Re-run with research: `/gsd:plan-phase {PHASE} --research`
-2. Disable Nyquist: `node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" config-set workflow.nyquist_validation false`
+If missing and Nyquist is still enabled/applicable — ask user:
+1. Re-run: `/gsd:plan-phase {PHASE} --research`
+2. Disable Nyquist with the exact command:
+   `node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" config-set workflow.nyquist_validation false`
 3. Continue anyway (plans fail Dimension 8)
 
 Proceed to Step 8 only if user selects 2 or 3.
@@ -322,6 +377,7 @@ Planner prompt:
 - {research_path} (Technical Research)
 - {verification_path} (Verification Gaps - if --gaps)
 - {uat_path} (UAT Gaps - if --gaps)
+- {UI_SPEC_PATH} (UI Design Contract — visual/interaction specs, if exists)
 </files_to_read>
 
 **Phase requirement IDs (every ID MUST appear in a plan's `requirements` field):** {phase_req_ids}
